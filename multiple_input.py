@@ -48,4 +48,5 @@ for input_data_row in input_data:
 #print input 
 #print(input_data)
 # Print results
-print(results)
+if __name__ == '__main__':
+    print(results)
