@@ -3,10 +3,17 @@
 # error = target - predicted
 # update the model multiple times 
 
+'''
+- start at random weight 
+- forward propagation to make prediction 
+- backward propagation to calculate slope of the loss function 
+- multiply the slope by learning rate and subtract from the current weight 
+'''
+
 import numpy as np 
 import matplotlib.pyplot as plt 
 
-#return gradient slope 
+#return slop of loss function 
 def get_slope(input_data, target, weights):
     error = get_error(input_data, target, weights)
     slope = 2 * input_data * error 
@@ -25,13 +32,13 @@ def get_error(input_data, target, weights):
     return error
 
 # The data point you will make a prediction for
-input_data = np.array([1,2,3])
+input_data = np.array([4,2,3])
 
 #target 
-target_actual = 1
+target_actual = 0
 
 # Sample weights
-weights = np.array([0,1,2])
+weights = np.array([10,1,2])
 
 learning_rate = 0.01
 
@@ -42,6 +49,7 @@ mse_hist = []
 for i in range(20):
     slope = get_slope(input_data, target_actual, weights)
     weights = weights - learning_rate * slope
+    print('iteration {0} weights : {1}'.format(i, weights))
     mse = get_mse(input_data, target_actual, weights)
     mse_hist.append(mse)
 
