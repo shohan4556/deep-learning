@@ -1,11 +1,15 @@
 #specify architecture
 #compile 
 #fit 
+#save model
+#reload model 
 #predict 
 #evaluate 
 import keras 
 from keras.layers import Dense 
 from keras.models import Sequential 
+from keras.models import load_model
+from keras.callbacks import EarlyStopping
 import numpy as np 
 import pandas as pd 
 
@@ -40,11 +44,20 @@ model.add(Dense(32, activation='relu'))
 model.add(Dense(1))
 
 #compile 
-model.compile(optimizer='adam', loss='mean_squared_error')
+model.compile(optimizer='adam', loss='mean_squared_error', metrics=['accuracy'])
+
+#stop when see model not improving 
+early_stopping_monitor = EarlyStopping(patience=2)
 
 #fit
-model.fit(predtictor, target)
+model.fit(predtictor, target, validation_split=0.3, epochs=20, callbacks=[early_stopping_monitor])
 
-#preditc 
+#save
+model.save('hourly_wages.h5')
+model.summary()
+
+#reload 
+my_model = load_model('hourly_wages.h5')
+# predict  
 
 
