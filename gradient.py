@@ -49,7 +49,7 @@ mse_hist = []
 for i in range(20):
     slope = get_slope(input_data, target_actual, weights)
     weights = weights - learning_rate * slope
-    print('iteration {0} weights : {1}'.format(i, weights))
+    #print('iteration {0} weights : {1}'.format(i, weights))
     mse = get_mse(input_data, target_actual, weights)
     mse_hist.append(mse)
 
